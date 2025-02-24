@@ -7,3 +7,5 @@ console.log(user.username);
 fs.appendFile('greeting.txt','Hi'+user.username+'!\n', ()=>{
     console.log('file is created');
 });
+
+console.log(fs);
