@@ -37,3 +37,11 @@ const add =function(a,b,prince){
 // });
 
 add(2,3, ()=>console.log('add completed'));
+ 
+const file=require('./importFiles');
+console.log('server file is avilable');
+var age=file.age;
+
+var result=file.addNumber(age+18, 10);
+console.log(age);
+console.log('result is now '+result);
