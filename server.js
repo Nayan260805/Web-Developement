@@ -49,5 +49,3 @@ var result=file.addNumber(age+18, 10);
 console.log(age);
 console.log('result is now '+result);
 
-
-var data=
