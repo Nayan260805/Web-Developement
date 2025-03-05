@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json()); // req.body
 
 const person = require('./models/person');
+const Menu = require('./models/Menu');
 //GET
 app.get('/',function(req,res){
     res.send('hello world Nayan')
@@ -46,6 +47,24 @@ app.get('/person', async (req,res)=>{
         res.status(500).json({error: 'Internal server Error'});
 
     }
+})
+
+app.get("/person/:workType",async(req, res)=>{
+    try{
+        const workType= req.params.workType; // Extra the work type from the URL parameter
+        if(workType=='chef'|| workType=='manager'|| workType=='waiter'){
+            const response=await person.find({work:workType});
+            console.log('response fetched');
+            res.status(200).json(response);
+
+        }else{
+            res.status(404).json({error:'Invalide work type'});
+        }
+    }catch(err){
+        console.log(err);
+        res.status(500).json({error: 'Internal Server Error'});
+    }
+   
 })
 
 app.listen(3000,()=>{
