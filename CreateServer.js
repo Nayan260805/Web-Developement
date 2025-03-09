@@ -7,11 +7,18 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json()); // req.body
 const PORT=process.env.PORT || 3000;
 
-const person = require('./models/person');
-const Menu = require('./models/Menu');
+//middleware Function
+const logRequest=(req,res,next)=>{
+    console.log(`[${new Date().toLocaleString()}] Request Made to: ${req.originalUrl}`);
+    next();
+}
+
+// const person = require('./models/person');
+// const Menu = require('./models/Menu');
 //GET
-app.get('/',function(req,res){
-    res.send('hello world Nayan')
+app.use(logRequest);
+app.get('/', function(req,res){
+    res.send('hello world Nayan');
 })
 
 // app.get('/chicken',(req,res)=>{
@@ -25,7 +32,7 @@ app.get('/',function(req,res){
 
 //Import the router files
 const personRouter =require('./Routes/personRouter');
-const menuRoutes =require('./Routes/menuRoutes');;
+const menuRoutes =require('./Routes/menuRoutes');
 app.use('/person' ,personRouter);
 app.use('/Menu' ,menuRoutes);
 
